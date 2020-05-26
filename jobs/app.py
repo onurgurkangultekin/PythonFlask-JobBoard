@@ -33,8 +33,5 @@ def execute_sql(sql, values=(), commit=False, single=False):
 @app.route('/')
 @app.route('/jobs')
 def jobs():
-    query = """SELECT job.id, job.title, job.description, job.salary,
-                          employer.id as employer_id, employer.name as employer_name
-                          FROM job JOIN employer ON employer.id = job.employer_id"""
-    jobs = execute_sql(sql=query)
+    jobs = execute_sql('SELECT job.id, job.title, job.description, job.salary, employer.id as employer_id, employer.name as employer_name FROM job JOIN employer ON employer.id = job.employer_id')
     return render_template("index.html", jobs=jobs)
